@@ -2,10 +2,15 @@ package org.berezinasabina;
 
 public class FilterConfig {
     private String inputFilePath;
+
     private String outputFilePath;
+
     private Integer topRecords;
+
     private Integer lastRecords;
+
     private Boolean malesOnly;
+
     private Boolean femalesOnly;
 
     public String getInputFilePath() {

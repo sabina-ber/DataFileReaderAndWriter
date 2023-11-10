@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE module PUBLIC
+        "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
+        "https://checkstyle.org/dtds/configuration_1_3.dtd">
+
+<module name="Checker">
+    <!-- Базовые настройки аудитора -->
+    <module name="TreeWalker">
+
+        <!-- Правила отступов -->
+        <module name="Indentation">
+            <property name="basicOffset" value="4"/>
+            <property name="braceAdjustment" value="0"/>
+            <property name="caseIndent" value="4"/>
+            <property name="throwsIndent" value="4"/>
+            <property name="lineWrappingIndentation" value="4"/>
+            <property name="arrayInitIndent" value="4"/>
+        </module>
+
+        <!-- Проверка на наличие лишних и отсутствующих скобок -->
+        <module name="NeedBraces"/>
+
+        <!-- Правила для фигурных скобок -->
+        <module name="LeftCurly"/>
+        <module name="RightCurly"/>
+
+        <!-- Проверка на множественные пустые строки -->
+        <module name="EmptyLineSeparator"/>
+
+        <!-- Проверка на однострочные и многострочные комментарии -->
+        <module name="CommentsIndentation"/>
+
+        <!-- Правила для импортов -->
+        <module name="AvoidStarImport"/>
+        <module name="RedundantImport"/>
+        <module name="UnusedImports"/>
+
+        <!-- Проверка Javadoc -->
+<!--        <module name="JavadocType"/>-->
+<!--        <module name="JavadocMethod"/>-->
+<!--        <module name="JavadocVariable"/>-->
+
+        <!-- Другие общие проверки -->
+        <module name="MethodName"/>
+        <module name="ParameterName"/>
+        <module name="TypeName"/>
+    </module>
+</module>

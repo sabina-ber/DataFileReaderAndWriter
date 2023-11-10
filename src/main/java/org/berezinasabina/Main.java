@@ -16,20 +16,6 @@ public class Main {
             DataWriter dataWriter = DataWriterFactory.getDataWriter(filterConfig.getOutputFilePath());
             dataWriter.writeData(filteredClients, filterConfig.getOutputFilePath());
 
-
-
-//            for (Client client : filteredClients) {
-//                System.out.println(client);
-//            }
-
-            if (filterConfig.getOutputFilePath() != null && !filterConfig.getOutputFilePath().isEmpty()) {
-              //  saveClientsToFile(filteredClients, filterConfig.getOutputFilePath());
-            } else {
-                for (Client client : filteredClients) {
-                    System.out.println(client);
-                }
-            }
-
         } catch (IOException e) {
             e.printStackTrace();
             System.err.println("An error occurred while reading or writing the CSV file.");

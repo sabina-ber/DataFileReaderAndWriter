@@ -53,7 +53,7 @@ public class CsvDataReader implements DataReader {
         for (DateTimeFormatter formatter : formatters) {
             try {
                 return LocalDate.parse(dateString.trim(), formatter);
-            } catch (DateTimeParseException e) {
+            } catch (DateTimeParseException ignored) {
             }
         }
         throw new DateTimeParseException("Could not parse the date: " + dateString, dateString, 0);

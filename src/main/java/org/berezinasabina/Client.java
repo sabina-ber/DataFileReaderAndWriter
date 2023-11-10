@@ -4,11 +4,16 @@ import java.time.LocalDate;
 
 public class Client {
     private String firstName;
+
     private String lastName;
+
     private String gender;
+
     private LocalDate birthDate;
 
-    // Конструктор
+    public Client() {
+    }
+
     public Client(String firstName, String lastName, String gender, LocalDate birthDate) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -50,6 +55,7 @@ public class Client {
 
     // toString() метод для удобного отображения информации о клиенте
     @Override
+
     public String toString() {
         return "Client{" +
                 "firstName='" + firstName + '\'' +
@@ -60,19 +66,32 @@ public class Client {
     }
 
     @Override
+
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Client)) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (!(o instanceof Client)) {
+            return false;
+        }
 
         Client client = (Client) o;
 
-        if (!firstName.equals(client.firstName)) return false;
-        if (!lastName.equals(client.lastName)) return false;
-        if (!gender.equals(client.gender)) return false;
+        if (!firstName.equals(client.firstName)) {
+            return false;
+        }
+        if (!lastName.equals(client.lastName)) {
+            return false;
+        }
+        if (!gender.equals(client.gender)) {
+            return false;
+        }
         return birthDate.equals(client.birthDate);
     }
 
     @Override
+
     public int hashCode() {
         int result = firstName.hashCode();
         result = 31 * result + lastName.hashCode();
