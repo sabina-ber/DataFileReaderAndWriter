@@ -13,6 +13,26 @@ public class FilterConfig {
 
     private Boolean femalesOnly;
 
+    private String nameFilter;
+
+    private String lastNameFilter;
+
+    public String getNameFilter() {
+        return nameFilter;
+    }
+
+    public String getLastNameFilter() {
+        return lastNameFilter;
+    }
+
+    public void setNameFilter(String nameFilter) {
+        this.nameFilter = nameFilter;
+    }
+
+    public void setLastNameFilter(String lastNameFilter) {
+        this.lastNameFilter = lastNameFilter;
+    }
+
     public String getInputFilePath() {
         return inputFilePath;
     }

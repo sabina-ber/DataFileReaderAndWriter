@@ -26,19 +26,19 @@ public class ClientRepository {
 
     public List<Client> getFilteredClients(FilterConfig filterConfig) {
         Stream<Client> clientStream = clients.stream();
-        if (filterConfig.getTopRecords() != null && filterConfig.getLastRecords() != null) {
-            throw new IllegalArgumentException("Cannot use --top and --last together. Please specify only one.");
-        }
-        if (filterConfig.getFemalesOnly() != null && filterConfig.getMalesOnly() != null
-            && filterConfig.getFemalesOnly() && filterConfig.getMalesOnly()) {
-            throw new IllegalArgumentException("Cannot use --males-only and --females-only" +
-                    " together. Please specify only one.");
+
+        if (filterConfig.getMalesOnly() != null && filterConfig.getMalesOnly()) {
+            clientStream = clientStream.filter(client -> "M".equalsIgnoreCase(client.getGender()));
+        } else if (filterConfig.getFemalesOnly() != null && filterConfig.getFemalesOnly()) {
+            clientStream = clientStream.filter(client -> "F".equalsIgnoreCase(client.getGender()));
         }
 
-        if (Boolean.TRUE.equals(filterConfig.getMalesOnly())) {
-            clientStream = clientStream.filter(client -> "M".equalsIgnoreCase(client.getGender()));
-        } else if (Boolean.TRUE.equals(filterConfig.getFemalesOnly())) {
-            clientStream = clientStream.filter(client -> "F".equalsIgnoreCase(client.getGender()));
+        if (filterConfig.getNameFilter() != null && !filterConfig.getNameFilter().isEmpty()) {
+            clientStream = clientStream.filter(client -> client.getFirstName().equalsIgnoreCase(filterConfig.getNameFilter()));
+        }
+
+        if (filterConfig.getLastNameFilter() != null && !filterConfig.getLastNameFilter().isEmpty()) {
+            clientStream = clientStream.filter(client -> client.getLastName().equalsIgnoreCase(filterConfig.getLastNameFilter()));
         }
 
         clientStream = clientStream.sorted(
