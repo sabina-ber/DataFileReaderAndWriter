@@ -11,6 +11,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,6 +40,9 @@ class ClientRepositoryTest {
         testData.add(new Client("Lucas", "Moore", "M", LocalDate.of(1989, 8, 13)));
         testData.add(new Client("Mia", "Jackson", "F", LocalDate.of(1994, 9, 14)));
         testData.add(new Client("John", "Martin", "M", LocalDate.of(1975, 10, 15)));
+        for (Client client : testData) {
+            clientRepository.addClient(client);
+        }
     }
 
     @Test
@@ -77,6 +81,57 @@ class ClientRepositoryTest {
             assertEquals("Doe", client.getLastName());
             assertEquals("F", client.getGender());
         });
+    }
+
+    @Test
+    void testGetTopFiveClients() {
+        List<Client> sortedTestData = new ArrayList<>(testData);
+        sortedTestData.sort(
+                Comparator.comparing(Client::getBirthDate)
+                        .thenComparing(Client::getLastName)
+                        .thenComparing(Client::getFirstName)
+        );
+
+        FilterConfig filterConfig = new FilterConfig();
+        filterConfig.setTopRecords(5);
+
+        List<Client> topClients = clientRepository.getFilteredClients(filterConfig);
+
+        assertEquals(5, topClients.size());
+        for (int i = 0; i < 5; i++) {
+            assertEquals(sortedTestData.get(i), topClients.get(i));
+        }
+    }
+
+    @Test
+    void testGetLastFiveClients() {
+        List<Client> sortedTestData = new ArrayList<>(testData);
+        sortedTestData.sort(
+                Comparator.comparing(Client::getBirthDate)
+                        .thenComparing(Client::getLastName)
+                        .thenComparing(Client::getFirstName)
+        );
+
+        FilterConfig filterConfig = new FilterConfig();
+        filterConfig.setLastRecords(5);
+
+        List<Client> lastClients = clientRepository.getFilteredClients(filterConfig);
+
+        assertEquals(5, lastClients.size());
+        int sortedSize = sortedTestData.size();
+        for (int i = 0; i < 5; i++) {
+            assertEquals(sortedTestData.get(sortedSize - 5 + i), lastClients.get(i));
+        }
+    }
+
+    @Test
+    void testGetTopFiveClients1() {
+        FilterConfig filterConfig = new FilterConfig();
+        filterConfig.setTopRecords(5);
+
+        List<Client> topClients = clientRepository.getFilteredClients(filterConfig);
+
+        assertEquals(5, topClients.size());
     }
 }
 
