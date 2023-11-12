@@ -134,5 +134,3 @@ class ClientRepositoryTest {
         assertEquals(5, topClients.size());
     }
 }
-
-
