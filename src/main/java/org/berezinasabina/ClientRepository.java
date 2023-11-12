@@ -10,6 +10,7 @@ import java.util.stream.Stream;
 public class ClientRepository {
     private final List<Client> clients = new ArrayList<>();
 
+
     public void loadData(String filePath) throws IOException {
         DataReader dataReader = DataReaderFactory.getDataReader(filePath);
         List<Client> data = dataReader.readData(filePath);

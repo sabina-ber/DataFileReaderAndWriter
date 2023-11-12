@@ -24,7 +24,11 @@ public class Main {
         try {
             clientRepository.loadData(filterConfig.getInputFilePath());
         } catch (IOException e) {
-            System.err.println("Error reading file: " + e.getMessage());
+            if (e.getMessage().contains("Error parsing date")) {
+                System.err.println("Error parsing date: " + e.getMessage());
+            } else {
+                System.err.println("Error reading file: " + e.getMessage());
+            }
             return;
         }
 
@@ -41,4 +45,5 @@ public class Main {
         }
     }
 }
+
 
